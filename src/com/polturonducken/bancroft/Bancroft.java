@@ -14,6 +14,7 @@ import com.codename1.ui.Label;
 import com.codename1.ui.NavigationCommand;
 import com.codename1.ui.RadioButton;
 import com.codename1.ui.Slider;
+import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
@@ -30,12 +31,18 @@ public class Bancroft {
     private Resources theme;
 
     private Form home;
+    
+    private int screenWidth;
+    private int screenHeight;
 
     public void init(Object context) {
         theme = UIManager.initFirstTheme("/theme");
 
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
+        
+        screenWidth = Display.getInstance().getDisplayWidth();
+        screenHeight = Display.getInstance().getDisplayHeight();
 
         // Pro only feature, uncomment if you have a pro subscription
         // Log.bindCrashProtection(true);
@@ -50,33 +57,23 @@ public class Bancroft {
         //create and build the home Form
         home = new Form("Home");
         home.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        home.addComponent(new Label("This is a Label"));
-        home.addComponent(new Button("This is a Button"));
-        TextField txt = new TextField();
-        txt.setHint("This is a TextField");
-        home.addComponent(txt);
-        home.addComponent(new CheckBox("This is a CheckBox"));
-        RadioButton rb1 = new RadioButton("This is a Radio Button 1");
-        rb1.setGroup("group");
-        home.addComponent(rb1);
-        RadioButton rb2 = new RadioButton("This is a Radio Button 2");
-        rb2.setGroup("group");
-        home.addComponent(rb2);
-        final Slider s = new Slider();
-        s.setText("50%");
-        s.setProgress(50);
-        s.setEditable(true);
-        s.setRenderPercentageOnTop(true);
-        home.addComponent(s);
-        
-        Button b1 = new Button("Show a Dialog");
-        b1.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent evt) {
-                Dialog.show("Dialog Title", "Dialog Body", "Ok", "Cancel");
-            }
+        Label welcome = new Label("Welcome to our very own Bancroft App!");
+        home.addComponent(welcome);
+        TextField username = new TextField();
+        username.setHint("Username");
+        TextField password = new TextField();
+        password.setHint("Password");
+        password.setConstraint(TextArea.PASSWORD);
+        home.addComponent(username);
+        home.addComponent(password);
+        Button login = new Button("Login to Portal");
+        login.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				login();
+			}
         });
-        home.addComponent(b1);
+        
+        home.addComponent(login);
         
         //Create Form1 and Form2 and set a Back Command to navigate back to the home Form        
         Form form1 = new Form("Form1");
@@ -153,6 +150,10 @@ public class Bancroft {
     }
 
     public void destroy() {
+    }
+    
+    public void login() {
+    	// Implement logging in to portal. Easy-peasy
     }
 
 }
