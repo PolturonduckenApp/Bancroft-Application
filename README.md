@@ -1,3 +1,3 @@
 # Bancroft-Application
 
-## Created by Polturonducken
+## Created by Polturonducken, the greatest company on Earth
