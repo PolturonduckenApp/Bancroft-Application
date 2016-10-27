@@ -68,8 +68,6 @@ public class Bancroft {
         login = new Form("Login");
         setupLoginForm();
         setBackCommand(login);
-        Form form2 = new Form("Form2");
-        setBackCommand(form2);
 
         //Add navigation commands to the home Form
         NavigationCommand homeCommand = new NavigationCommand("Home");
@@ -80,41 +78,9 @@ public class Bancroft {
         cmd1.setNextForm(login);
         home.getToolbar().addCommandToSideMenu(cmd1);
 
-        NavigationCommand cmd2 = new NavigationCommand("Form2");
-        cmd2.setNextForm(form2);
-        home.getToolbar().addCommandToSideMenu(cmd2);
-
         //Add Edit, Add and Delete Commands to the home Form context Menu
         Image im = FontImage.createMaterial(FontImage.MATERIAL_MODE_EDIT, UIManager.getInstance().getComponentStyle("Command"));
-        Command edit = new Command("Edit", im) {
-
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                System.out.println("Editing");
-            }
-        };
-        home.getToolbar().addCommandToOverflowMenu(edit);
-
-        im = FontImage.createMaterial(FontImage.MATERIAL_LIBRARY_ADD, UIManager.getInstance().getComponentStyle("Command"));
-        Command add = new Command("Add", im) {
-
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                System.out.println("Adding");
-            }
-        };
-        home.getToolbar().addCommandToOverflowMenu(add);
-
-        im = FontImage.createMaterial(FontImage.MATERIAL_DELETE, UIManager.getInstance().getComponentStyle("Command"));
-        Command delete = new Command("Delete", im) {
-
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                System.out.println("Deleting");
-            }
-
-        };
-        home.getToolbar().addCommandToOverflowMenu(delete);
+        
 
         home.show();
     }
