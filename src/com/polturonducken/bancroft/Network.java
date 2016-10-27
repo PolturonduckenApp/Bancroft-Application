@@ -32,6 +32,7 @@ public class Network {
             List items = (List)response.get("items");
             return items;
         } catch (Exception e) {
+        	e.printStackTrace();
         }
         return null;
     }
