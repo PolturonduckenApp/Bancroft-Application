@@ -8,6 +8,7 @@ import com.codename1.ui.Command;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.*;
 import com.codename1.ui.NavigationCommand;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
@@ -68,8 +69,10 @@ public class Bancroft {
         TextField password = new TextField();
         password.setHint("Password");
         password.setConstraint(TextArea.PASSWORD);
+        Button enter = new Button("Enter");
         home.addComponent(username);
         home.addComponent(password);
+        home.addComponent(enter);
         
         //Create website page and set a Back Command to navigate back to the home Form        
         website = new Form("Website");
