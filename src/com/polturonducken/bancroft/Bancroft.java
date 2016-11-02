@@ -88,6 +88,16 @@ public class Bancroft {
         NavigationCommand websiteCommand = new NavigationCommand("Website");
         websiteCommand.setNextForm(website);
         home.getToolbar().addCommandToSideMenu(websiteCommand);
+        
+        //Add a Schedule tab to the toolBar
+        NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
+        //websiteCommand.setNextForm(schedule);
+        home.getToolbar().addCommandToSideMenu(scheduleCommand);
+        
+        //Add a Homework Manager tab to the toolBar
+        NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
+        //websiteCommand.setNextForm(homework);
+        home.getToolbar().addCommandToSideMenu(homeworkCommand);
 
         //Add Edit, Add and Delete Commands to the home Form context Menu
         Image im = FontImage.createMaterial(FontImage.MATERIAL_MODE_EDIT, UIManager.getInstance().getComponentStyle("Command"));
