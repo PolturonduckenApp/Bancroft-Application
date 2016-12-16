@@ -134,6 +134,16 @@ public class Bancroft {
     public void login() {
     	// Implement logging in to portal. Easy-peasy
     }
+    
+    public void downloadCalendar() {
+    	/*step one: student logs in to portal (possibly add the return value CSV instead of void)
+    	 * Step 2: clicks a big, giant, DOWNLOAD CALENDAR button
+    	 * Step 3: write code to automatically download an iCal / CSV of the calendar
+    	 * 4: import the CSV/iCal data into this app, or google calendar
+    	 * 5: read through the calendar data and display/use the data in the "priority of homework" tab
+    	 * 6: students happy and know what homework to complete first
+    	*/
+    }
     //connect website page to the Bancroft portal website
     public void setupWebsiteForm() {
     	WebBrowser browser = new WebBrowser("https://www.bancroftschool.org/userlogin.cfm?");
