@@ -5,5 +5,6 @@
 	<classpathentry kind="lib" path="lib/CodenameOne.jar" sourcepath="lib/CodenameOne_SRC.zip"/>
 	<classpathentry kind="lib" path="lib/impl/cls"/>
 	<classpathentry kind="lib" path="lib/impl/stubs"/>
+	<classpathentry kind="lib" path="jars/crawler4j-4.1-jar-with-dependencies.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
