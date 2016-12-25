@@ -47,14 +47,13 @@ public class Bancroft {
 
     //reads in the screen dimentions 
     public void init(Object context) {
-    theme = UIManager.initFirstTheme("/theme");
-
-    // Enable Toolbar on all Forms by default
-    Toolbar.setGlobalToolbar(true);
-        
-    screenWidth = Display.getInstance().getDisplayWidth();
-    screenHeight = Display.getInstance().getDisplayHeight();
-
+	    theme = UIManager.initFirstTheme("/theme");
+	
+	    // Enable Toolbar on all Forms by default
+	    Toolbar.setGlobalToolbar(true);
+	        
+	    screenWidth = Display.getInstance().getDisplayWidth();
+	    screenHeight = Display.getInstance().getDisplayHeight();
     }
     
   //gets called to start up the app
