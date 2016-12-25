@@ -23,6 +23,7 @@ import com.codename1.ui.layouts.*;
  * for building native mobile applications using Java. It has been added to and modified to match
  * the app's desired funtions by Andrew Turley, Ryan Polhemus, and Philip Onffroy.
  */
+
 public class Bancroft {
 	
 	//current page the user is looking at
@@ -63,17 +64,10 @@ public class Bancroft {
             return;
         }
         
-        //create and build the home Form
-        setupHomeForm();
-        
-        //Create website page and set a Back Command to navigate back to the home Form        
+        //Setup different pages
+        setupHomeForm();      
         setupWebsiteForm();
-        //setBackCommand(website);
-       
-        //Create and build schedule page
         setupScheduleForm();
-        
-        //Create and build homeworkManager page
         setupHomeworkForm();
         
         //Add navigation commands to the home Form
@@ -81,7 +75,6 @@ public class Bancroft {
 
         //Add Edit, Add and Delete Commands to the home Form context Menu
         Image img = FontImage.createMaterial(FontImage.MATERIAL_MODE_EDIT, UIManager.getInstance().getComponentStyle("Command"));
-
 
         home.show();
     }
