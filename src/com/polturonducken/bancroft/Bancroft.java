@@ -31,6 +31,7 @@ public class Bancroft {
 
     //home page that pops up when app is open
     private Form home;
+    //test
     
     //page that brings user to the Bancroft School website
     private Form website;
