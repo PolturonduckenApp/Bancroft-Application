@@ -63,52 +63,21 @@ public class Bancroft {
             return;
         }
         
-
         //create and build the home Form
-        home = new Form("Home");
-        home.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        Label welcome = new Label("Welcome to the Bancroft App!");
-        home.addComponent(welcome);
-        TextField username = new TextField();
-        username.setHint("Username");
-        TextField password = new TextField();
-        password.setHint("Password");
-        password.setConstraint(TextArea.PASSWORD);
-        Button enter = new Button("Enter");
-        home.addComponent(username);
-        home.addComponent(password);
-        home.addComponent(enter);
+        setupHomeForm();
         
         //Create website page and set a Back Command to navigate back to the home Form        
-        website = new Form("Website");
         setupWebsiteForm();
         //setBackCommand(website);
        
         //Create and build schedule page
-        schedule = new Form("Schedule");
+        setupScheduleForm();
         
         //Create and build homeworkManager page
-        homeworkManager = new Form("Homework Manager");
+        setupHomeworkForm();
         
         //Add navigation commands to the home Form
-        NavigationCommand homeCommand = new NavigationCommand("Home");
-        homeCommand.setNextForm(home);
-        home.getToolbar().addCommandToSideMenu(homeCommand);
-        
-        //Add navigation commands to the website Form
-        NavigationCommand websiteCommand = new NavigationCommand("Website");
-        websiteCommand.setNextForm(website);
-        home.getToolbar().addCommandToSideMenu(websiteCommand);
-        
-        //Add a Schedule tab to the toolBar
-        NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
-        scheduleCommand.setNextForm(schedule);
-        home.getToolbar().addCommandToSideMenu(scheduleCommand);
-        
-        //Add a Homework Manager tab to the toolBar
-        NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
-        websiteCommand.setNextForm(homeworkManager);
-        home.getToolbar().addCommandToSideMenu(homeworkCommand);
+        setupNavigationCommands();
 
         //Add Edit, Add and Delete Commands to the home Form context Menu
         Image img = FontImage.createMaterial(FontImage.MATERIAL_MODE_EDIT, UIManager.getInstance().getComponentStyle("Command"));
@@ -156,11 +125,66 @@ public class Bancroft {
     	 * 6: students happy and know what homework to complete first
     	*/
     }
+    
+    // Create the starting default form
+    public void setupHomeForm() {
+        home = new Form("Home");
+        home.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+        
+        //Title label
+        Label welcome = new Label("Welcome to the Bancroft App!");
+        
+        //Username and password textfields
+        TextField username = new TextField();
+        username.setHint("Username");
+        TextField password = new TextField();
+        password.setHint("Password");
+        password.setConstraint(TextArea.PASSWORD);
+        
+        //Login button
+        Button enter = new Button("Enter");
+        
+        //Add components to form
+        home.addComponent(welcome);
+        home.addComponent(username);
+        home.addComponent(password);
+        home.addComponent(enter);
+    }
+    
     //connect website page to the Bancroft portal website
     public void setupWebsiteForm() {
+        website = new Form("Website");
     	WebBrowser browser = new WebBrowser("https://www.bancroftschool.org/userlogin.cfm?");
     	website.setLayout(new BorderLayout());
     	website.addComponent(BorderLayout.CENTER, browser);
     }
-
+    
+    public void setupScheduleForm() {
+    	schedule = new Form("Schedule");
+    }
+    
+    public void setupHomeworkForm() {
+    	homeworkManager = new Form("Homework Manager");
+    }
+    
+    public void setupNavigationCommands() {
+    	NavigationCommand homeCommand = new NavigationCommand("Home");
+        homeCommand.setNextForm(home);
+        home.getToolbar().addCommandToSideMenu(homeCommand);
+        
+        //Add navigation commands to the website Form
+        NavigationCommand websiteCommand = new NavigationCommand("Website");
+        websiteCommand.setNextForm(website);
+        home.getToolbar().addCommandToSideMenu(websiteCommand);
+        
+        //Add a Schedule tab to the toolBar
+        NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
+        scheduleCommand.setNextForm(schedule);
+        home.getToolbar().addCommandToSideMenu(scheduleCommand);
+        
+        //Add a Homework Manager tab to the toolBar
+        NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
+        websiteCommand.setNextForm(homeworkManager);
+        home.getToolbar().addCommandToSideMenu(homeworkCommand);
+    }
 }
