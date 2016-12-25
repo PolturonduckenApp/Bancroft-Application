@@ -31,28 +31,33 @@ public class Bancroft {
 
     //home page that pops up when app is open
     private Form home;
-    //test
     
     //page that brings user to the Bancroft School website
     private Form website;
     
+    //page that shows user's upcoming schedule
+    private Form schedule;
+    
+    //page that displayed the priority of homework list
+    private Form homeworkManager;
+
     //this and the method below reads the hight and width of the screen of the device being used
     private int screenWidth;
     private int screenHeight;
 
     //reads in the screen dimentions 
     public void init(Object context) {
-        theme = UIManager.initFirstTheme("/theme");
+    theme = UIManager.initFirstTheme("/theme");
 
-        // Enable Toolbar on all Forms by default
-        Toolbar.setGlobalToolbar(true);
+    // Enable Toolbar on all Forms by default
+    Toolbar.setGlobalToolbar(true);
         
-        screenWidth = Display.getInstance().getDisplayWidth();
-        screenHeight = Display.getInstance().getDisplayHeight();
+    screenWidth = Display.getInstance().getDisplayWidth();
+    screenHeight = Display.getInstance().getDisplayHeight();
 
     }
     
-    //gets called to start up the app
+  //gets called to start up the app
     public void start() {
         if (current != null) {
             current.show();
@@ -78,8 +83,14 @@ public class Bancroft {
         //Create website page and set a Back Command to navigate back to the home Form        
         website = new Form("Website");
         setupWebsiteForm();
-        setBackCommand(website);
-
+        //setBackCommand(website);
+       
+        //Create and build schedule page
+        schedule = new Form("Schedule");
+        
+        //Create and build homeworkManager page
+        homeworkManager = new Form("Homework Manager");
+        
         //Add navigation commands to the home Form
         NavigationCommand homeCommand = new NavigationCommand("Home");
         homeCommand.setNextForm(home);
@@ -92,23 +103,24 @@ public class Bancroft {
         
         //Add a Schedule tab to the toolBar
         NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
-        //websiteCommand.setNextForm(schedule);
+        scheduleCommand.setNextForm(schedule);
         home.getToolbar().addCommandToSideMenu(scheduleCommand);
         
         //Add a Homework Manager tab to the toolBar
         NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
-        //websiteCommand.setNextForm(homework);
+        websiteCommand.setNextForm(homeworkManager);
         home.getToolbar().addCommandToSideMenu(homeworkCommand);
 
         //Add Edit, Add and Delete Commands to the home Form context Menu
-        Image im = FontImage.createMaterial(FontImage.MATERIAL_MODE_EDIT, UIManager.getInstance().getComponentStyle("Command"));
-        
+        Image img = FontImage.createMaterial(FontImage.MATERIAL_MODE_EDIT, UIManager.getInstance().getComponentStyle("Command"));
+
 
         home.show();
     }
     
     //command to allow user to go back and forth from (leave and go back to) a Form page 
     protected void setBackCommand(Form f) {
+    	/*
         Command back = new Command("") {
 
             @Override
@@ -116,13 +128,13 @@ public class Bancroft {
                 home.showBack();
             }
 
-        };
+        };*/
         //create icon in upper left corner (the switch-between-pages icon)
-        Image img = FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("TitleCommand"));
-        back.setIcon(img);
-        f.getToolbar().addCommandToLeftBar(back);
+        //Image img = FontImage.createMaterial(FontImage.MATERIAL_ARROW_BACK, UIManager.getInstance().getComponentStyle("TitleCommand"));
+        //back.setIcon(img);
+        //f.getToolbar().addCommandToLeftBar(back);
         f.getToolbar().setTitleCentered(true);
-        f.setBackCommand(back);
+        //f.setBackCommand(back);
     }
 
     public void stop() {
