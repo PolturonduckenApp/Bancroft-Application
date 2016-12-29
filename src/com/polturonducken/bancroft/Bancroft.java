@@ -150,6 +150,7 @@ public class Bancroft {
     	WebBrowser browser = new WebBrowser("https://www.bancroftschool.org/userlogin.cfm?");
     	website.setLayout(new BorderLayout());
     	website.addComponent(BorderLayout.CENTER, browser);
+    	//website.addComponent(browser);
     	setBackCommand(website);
     }
     
@@ -222,7 +223,7 @@ public class Bancroft {
         
         //Add a Homework Manager tab to the toolBar
         NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
-        websiteCommand.setNextForm(homeworkManager);
+        homeworkCommand.setNextForm(homeworkManager);
         home.getToolbar().addCommandToSideMenu(homeworkCommand);
     }
 	
