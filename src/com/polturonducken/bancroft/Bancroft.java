@@ -148,9 +148,7 @@ public class Bancroft {
     public void setupWebsiteForm() {
         website = new Form("Website");
     	WebBrowser browser = new WebBrowser("https://www.bancroftschool.org/userlogin.cfm?");
-    	website.setLayout(new BorderLayout());
-    	website.addComponent(BorderLayout.CENTER, browser);
-    	//website.addComponent(browser);
+    	website.addComponent(browser);
     	setBackCommand(website);
     }
     
