@@ -169,7 +169,7 @@ public class Bancroft {
     	setBackCommand(website);
     }
     
-    //to be used later, will allow for updating class info
+    //Allows for updating class info
     public void setupInputClassesForm() {
     	inputClasses = new Form("Input Classes");
 		
@@ -221,7 +221,8 @@ public class Bancroft {
 	    	scheduleInputs[5] = classes[5].getText();
 	    	scheduleInputs[6] = classes[6].getText();
 	    	schedInput = true;
-			setupNavigationCommands();
+		setupScheduleForm();
+		setupNavigationCommands();
         });
     }
     public void setupScheduleForm() {
@@ -319,14 +320,14 @@ public class Bancroft {
         websiteCommand.setNextForm(website);
         home.getToolbar().addCommandToSideMenu(websiteCommand);
         
-        /*Add a input classses tab to the overflow menu --for updating classes
+        //Add a input classses tab to the overflow menu for updating classes
         NavigationCommand classesCommand = new NavigationCommand("Input Classes");
        	classesCommand.setNextForm(inputClasses);
        	if(add){
        		home.getToolbar().addCommandToOverflowMenu(classesCommand); //addCommandToSideMenu(scheduleCommand);
        		add = false;
        	}
-       	*/
+       	
         
        	//Add the Displaying Schedule page to main menu
        	NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
