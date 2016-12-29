@@ -79,6 +79,7 @@ public class Bancroft {
         setupHomeForm();      
         setupWebsiteForm();
         setupHomeworkForm();
+        setupScheduleForm();
         setupInputClassesForm();
         
         //Add navigation commands to the home Form
@@ -163,6 +164,7 @@ public class Bancroft {
     	setBackCommand(website);
     }
     
+    //to be used later, will allow for updating class info
     public void setupInputClassesForm() {
     	inputClasses = new Form("Input Classes");
 		
@@ -214,20 +216,64 @@ public class Bancroft {
 	    	scheduleInputs[5] = classes[5].getText();
 	    	scheduleInputs[6] = classes[6].getText();
 	    	schedInput = true;
-			setupScheduleForm();
 			setupNavigationCommands();
         });
     }
     public void setupScheduleForm() {
     	schedule = new Form("Schedule");
-    	/*Checks if the schedule has been inputted yet. If not, goes into this loop. --may be used later, not now
+    	//Checks if the schedule has been inputted yet. If not, goes into this loop.
         if(!schedInput) {
-            Label intro = new Label("Please input classes in the upper right menu from the home page.");
+            Label intro = new Label("Please input classes below:");
             schedule.addComponent(intro);
             setBackCommand(schedule);
+            
+            //adding page content 
+            TextField[] classes = new TextField[7];
+            classes[0] = new TextField();
+            classes[0].setHint("First Period Class");
+            
+            classes[1] = new TextField();
+            classes[1].setHint("Second Period Class");
+            
+            classes[2] = new TextField();
+            classes[2].setHint("Third Period Class");
+            
+            classes[3] = new TextField();
+            classes[3].setHint("Fourth Period Class");
+            
+            classes[4] = new TextField();
+            classes[4].setHint("Fifth Period Class");
+            
+            classes[5] = new TextField();
+            classes[5].setHint("Sixth Period Class");
+            
+            classes[6] = new TextField();
+            classes[6].setHint("Seventh Period Class");
+            
+            Button schedEnter = new Button("Enter");
+            
+    	    //adding components
+    	    for(int i = 0; i < classes.length; i++){
+    	    	schedule.addComponent(classes[i]);
+    	    }
+    	    schedule.addComponent(schedEnter);
+    	    
+    	    //Sets the schedule input to true if user presses the enter button
+    	    schedEnter.addActionListener((e) -> {
+    	    	scheduleInputs[0] = classes[0].getText();
+    	    	scheduleInputs[1] = classes[1].getText();
+    	    	scheduleInputs[2] = classes[2].getText();
+    	    	scheduleInputs[3] = classes[3].getText();
+    	    	scheduleInputs[4] = classes[4].getText();
+    	    	scheduleInputs[5] = classes[5].getText();
+    	    	scheduleInputs[6] = classes[6].getText();
+    	    	schedInput = true;
+    	    	setupScheduleForm();
+    			setupNavigationCommands();
+            });
             		
         }
-        else{*/
+        else{
              //display the desired list of upcoming classes here
              Label schedIntro = new Label("Classes up Next:");
              schedule.addComponent(schedIntro);
@@ -241,6 +287,7 @@ public class Bancroft {
      	     
      	     setBackCommand(schedule);
      	     schedule.show();
+        }
     }
     
     public void setupHomeworkForm() {
@@ -251,7 +298,12 @@ public class Bancroft {
     	sendNotification("ID", "Test", "A good message");
     }
     
+    //add for overflow page
+    boolean add = true;
+    //boolean firstChange = true;
     public void setupNavigationCommands() {
+    	System.out.println("hey");
+    	
     	//Home navigation Form 
     	NavigationCommand homeCommand = new NavigationCommand("Home");
         homeCommand.setNextForm(home);
@@ -262,17 +314,28 @@ public class Bancroft {
         websiteCommand.setNextForm(website);
         home.getToolbar().addCommandToSideMenu(websiteCommand);
         
-        //Add a input classses tab to the overflow menu
+        /*Add a input classses tab to the overflow menu --for updating classes
         NavigationCommand classesCommand = new NavigationCommand("Input Classes");
        	classesCommand.setNextForm(inputClasses);
-       	home.getToolbar().addCommandToOverflowMenu(classesCommand); //addCommandToSideMenu(scheduleCommand);
-       
+       	if(add){
+       		home.getToolbar().addCommandToOverflowMenu(classesCommand); //addCommandToSideMenu(scheduleCommand);
+       		add = false;
+       	}
+       	*/
+        
        	//Add the Displaying Schedule page to main menu
-       	if(schedInput){
-       		NavigationCommand scheduleCommand;
-       		scheduleCommand = new NavigationCommand("Schedule");
-       		scheduleCommand.setNextForm(schedule);
+       	NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
+       	scheduleCommand.setNextForm(schedule);
+       	NavigationCommand afterScheduleCommand = new NavigationCommand("Schedule");
+       	afterScheduleCommand.setNextForm(schedule);
+       	
+       	if(!schedInput){
        		home.getToolbar().addCommandToSideMenu(scheduleCommand);
+       	}
+       	else{
+       		home.removeCommand(scheduleCommand);
+       		home.getToolbar().addCommandToSideMenu(afterScheduleCommand);
+       		home.revalidate();
        	}
        	
         //Add a Homework Manager tab to the toolBar
