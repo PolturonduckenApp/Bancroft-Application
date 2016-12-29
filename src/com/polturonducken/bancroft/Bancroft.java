@@ -227,7 +227,7 @@ public class Bancroft {
     public void setupHomeworkForm() {
     	homeworkManager = new Form("Homework Manager");
     	setBackCommand(homeworkManager);
-    	sendNotification();
+    	sendNotification("ID", "Test", "A good message");
     }
     
     public void setupNavigationCommands() {
@@ -257,13 +257,13 @@ public class Bancroft {
         home.getToolbar().addCommandToSideMenu(homeworkCommand);
     }
 	
-    public void sendNotification() {
+    public void sendNotification(String identification, String title, String message) {
 	    /* Template for sending notifications (from codenameone, https://www.codenameone.com/manual/appendix-ios.html
 	     * To be implemented to send schedule, homework notifications */
 	    LocalNotification n = new LocalNotification();
-	    n.setId("demo-notification");
-	    n.setAlertBody("It's time to take a break and look at me");
-	    n.setAlertTitle("Break Time!");
+	    n.setId(identification);
+	    n.setAlertBody(message);
+	    n.setAlertTitle(title);
 	    //n.setAlertSound("beep-01a.mp3");
 	    
 	    Display.getInstance().scheduleLocalNotification(
