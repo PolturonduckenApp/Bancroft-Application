@@ -258,20 +258,18 @@ public class Bancroft {
         home.getToolbar().addCommandToSideMenu(websiteCommand);
         
         //Add a Schedule tab to the toolBar
-        NavigationCommand scheduleCommand;
-        NavigationCommand afterScheduleCommand;
-        if(!schedInput){
-        	scheduleCommand = new NavigationCommand("Schedule");
-        	scheduleCommand.setNextForm(schedule);
-        	home.getToolbar().addCommandToOverflowMenu(scheduleCommand); //addCommandToSideMenu(scheduleCommand);
+    	NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
+    	scheduleCommand.setNextForm(schedule);
+    	NavigationCommand afterScheduleCommand = new NavigationCommand("Displayed Schedule");
+    	afterScheduleCommand.setNextForm(schedule);
+    	
+        if (!schedInput) {
+        	home.getToolbar().addCommandToSideMenu(scheduleCommand);
         }
-        else{
-        	scheduleCommand = new NavigationCommand("Schedule");
-        	//scheduleCommand.setNextForm(schedule);
-        	afterScheduleCommand = new NavigationCommand("Displayed Schedule");
-        	afterScheduleCommand.setNextForm(schedule);
-        	//home.getToolbar().removeOverflowCommand(scheduleCommand);
+        else {
         	home.getToolbar().addCommandToSideMenu(afterScheduleCommand);
+        	home.removeCommand(scheduleCommand);
+        	home.revalidate();
         }
         
          
