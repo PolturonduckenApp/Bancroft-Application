@@ -8,7 +8,7 @@ import com.codename1.ui.Command;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
-import com.codename1.uai.*;
+import com.codename1.ui.*;
 import com.codename1.ui.NavigationCommand;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
