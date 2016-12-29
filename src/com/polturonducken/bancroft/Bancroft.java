@@ -223,4 +223,20 @@ public class Bancroft {
         websiteCommand.setNextForm(homeworkManager);
         home.getToolbar().addCommandToSideMenu(homeworkCommand);
     }
+	
+    /* Template for sending notifications (from codenameone, https://www.codenameone.com/manual/appendix-ios.html
+     * Correct classes need to be imported (Doesnt compile yet)
+     * To be implemented to send schedule, homework notifications 
+    LocalNotification n = new LocalNotification();
+    n.setId("demo-notification");
+    n.setAlertBody("It's time to take a break and look at me");
+    n.setAlertTitle("Break Time!");
+    n.setAlertSound("beep-01a.mp3");
+
+    Display.getInstance().scheduleLocalNotification(
+            n,
+            System.currentTimeMillis() + 10 * 1000, // fire date/time
+            LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency
+    );*/
+
 }
