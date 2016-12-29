@@ -157,11 +157,11 @@ public class Bancroft {
     	//Create and build schedule page
         schedule = new Form("Schedule");
 	    
-	//Title label
+        //Title label
         Label schedIntro = new Label("To set up your schedule, please");//backslash n doesn't appear to work
         Label schedIntro2 = new Label("input your classes below.");
 	    
-       //adding page content 
+        //adding page content 
         TextField class1 = new TextField();
         class1.setHint("First Period Class");
         
@@ -185,17 +185,17 @@ public class Bancroft {
         
         Button schedEnter = new Button("Enter");
         
-	//adding components
-	schedule.addComponent(schedIntro);
-        schedule.addComponent(schedIntro2);
-	schedule.addComponent(class1);
-	schedule.addComponent(class2);
-	schedule.addComponent(class3);
-	schedule.addComponent(class4);
-	schedule.addComponent(class5);
-	schedule.addComponent(class6);
-	schedule.addComponent(class7);
-	schedule.addComponent(schedEnter);
+		//adding components
+		schedule.addComponent(schedIntro);
+	    schedule.addComponent(schedIntro2);
+		schedule.addComponent(class1);
+		schedule.addComponent(class2);
+		schedule.addComponent(class3);
+		schedule.addComponent(class4);
+		schedule.addComponent(class5);
+		schedule.addComponent(class6);
+		schedule.addComponent(class7);
+		schedule.addComponent(schedEnter);
 	    
     }
     
