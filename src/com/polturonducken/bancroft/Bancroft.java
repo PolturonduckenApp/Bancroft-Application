@@ -272,8 +272,6 @@ public class Bancroft {
         	home.revalidate();
         }
         
-         
-        
         //Add a Homework Manager tab to the toolBar
         NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
         homeworkCommand.setNextForm(homeworkManager);
@@ -295,5 +293,4 @@ public class Bancroft {
 	            LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency
 	    );
     }
-
 }
