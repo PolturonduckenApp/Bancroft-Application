@@ -263,7 +263,7 @@ public class Bancroft {
         if(!schedInput){
         	scheduleCommand = new NavigationCommand("Schedule");
         	scheduleCommand.setNextForm(schedule);
-        	home.getToolbar().addCommandToSideMenu(scheduleCommand);
+        	home.getToolbar().addCommandToOverflowMenu(scheduleCommand); //addCommandToSideMenu(scheduleCommand);
         }
         else{
         	scheduleCommand = new NavigationCommand("Schedule");
