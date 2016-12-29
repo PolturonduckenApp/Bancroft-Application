@@ -82,7 +82,6 @@ public class Bancroft {
     //command to allow user to go back and forth from (leave and go back to) a Form page
     //currently creates a back button but hope to change it to navigation menu in the future
     protected void setBackCommand(Form f) {
-    	
         Command back = new Command("") {
 
             @Override
@@ -151,6 +150,7 @@ public class Bancroft {
     	WebBrowser browser = new WebBrowser("https://www.bancroftschool.org/userlogin.cfm?");
     	website.setLayout(new BorderLayout());
     	website.addComponent(BorderLayout.CENTER, browser);
+    	setBackCommand(website);
     }
     
     public void setupScheduleForm() {
@@ -197,10 +197,12 @@ public class Bancroft {
 		schedule.addComponent(class7);
 		schedule.addComponent(schedEnter);
 	    
+		setBackCommand(schedule);
     }
     
     public void setupHomeworkForm() {
     	homeworkManager = new Form("Homework Manager");
+    	setBackCommand(homeworkManager);
     }
     
     public void setupNavigationCommands() {
