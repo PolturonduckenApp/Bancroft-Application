@@ -50,6 +50,9 @@ public class Bancroft {
 
     //Tells whether user has inputted their class schedule yet
     private boolean schedInput = false;
+    
+    //the text the user inputs for their 7 classes
+    private String[] scheduleInputs = new String[7];
 	
     //reads in the screen dimentions 
     public void init(Object context) {
@@ -167,46 +170,50 @@ public class Bancroft {
             Label schedIntro2 = new Label("input your classes below.");
     	    
             //adding page content 
-            TextField class1 = new TextField();
-            class1.setHint("First Period Class");
+            TextField[] classes = new TextField[7];
+            classes[0] = new TextField();
+            classes[0].setHint("First Period Class");
             
-            TextField class2 = new TextField();
-            class2.setHint("Second Period Class");
+            classes[1] = new TextField();
+            classes[1].setHint("Second Period Class");
             
-            TextField class3 = new TextField();
-            class3.setHint("Third Period Class");
+            classes[2] = new TextField();
+            classes[2].setHint("Third Period Class");
             
-            TextField class4 = new TextField();
-            class4.setHint("Fourth Period Class");
+            classes[3] = new TextField();
+            classes[3].setHint("Fourth Period Class");
             
-            TextField class5 = new TextField();
-            class5.setHint("Fifth Period Class");
+            classes[4] = new TextField();
+            classes[4].setHint("Fifth Period Class");
             
-            TextField class6 = new TextField();
-            class6.setHint("Sixth Period Class");
+            classes[5] = new TextField();
+            classes[5].setHint("Sixth Period Class");
             
-            TextField class7 = new TextField();
-            class7.setHint("Seventh Period Class");
+            classes[6] = new TextField();
+            classes[6].setHint("Seventh Period Class");
             
             Button schedEnter = new Button("Enter");
             
     	    //adding components
     	    schedule.addComponent(schedIntro);
     	    schedule.addComponent(schedIntro2);
-            schedule.addComponent(class1);
-    	    schedule.addComponent(class2);
-    	    schedule.addComponent(class3);
-    	    schedule.addComponent(class4);
-    	    schedule.addComponent(class5);
-    	    schedule.addComponent(class6);
-    	    schedule.addComponent(class7);
+    	    for(int i = 0; i < classes.length; i++){
+    	    	schedule.addComponent(classes[i]);
+    	    }
     	    schedule.addComponent(schedEnter);
     		
     	    setBackCommand(schedule);
     		
-
+    	    
     	    //Sets the schedule input to true if user presses the enter button
     	    schedEnter.addActionListener((e) -> {
+    	    scheduleInputs[0] = classes[0].getText();
+    	    scheduleInputs[1] = classes[1].getText();
+    	    scheduleInputs[2] = classes[2].getText();
+    	    scheduleInputs[3] = classes[3].getText();
+    	    scheduleInputs[4] = classes[4].getText();
+    	    scheduleInputs[5] = classes[5].getText();
+    	    scheduleInputs[6] = classes[6].getText();
     		schedInput = true;
     		setupScheduleForm();
     		setupNavigationCommands();
@@ -218,7 +225,15 @@ public class Bancroft {
              schedule = new Form("Displayed Schedule");
              //display the desired list of upcoming classes here
              Label schedIntro = new Label("Classes up Next:");
-     	     schedule.addComponent(schedIntro);
+             schedule.addComponent(schedIntro);
+             
+             //displaying the inputted classes below -- later will amke this list revolve to put most recent at top
+             Label[] afterClasses = new Label[7];
+             for(int i = 0; i < afterClasses.length; i++){
+            	 afterClasses[i] = new Label(scheduleInputs[i]);
+            	 schedule.addComponent(afterClasses[i]);
+             }
+     	     
      	     setBackCommand(schedule);
      	     schedule.show();
         }
@@ -227,6 +242,8 @@ public class Bancroft {
     public void setupHomeworkForm() {
     	homeworkManager = new Form("Homework Manager");
     	setBackCommand(homeworkManager);
+    	Label homeIntro = new Label("Priority of Homework list:");//backslash n doesn't appear to work
+        homeworkManager.addComponent(homeIntro);
     	sendNotification("ID", "Test", "A good message");
     }
     
@@ -242,14 +259,22 @@ public class Bancroft {
         
         //Add a Schedule tab to the toolBar
         NavigationCommand scheduleCommand;
+        NavigationCommand afterScheduleCommand;
         if(!schedInput){
         	scheduleCommand = new NavigationCommand("Schedule");
+        	scheduleCommand.setNextForm(schedule);
+        	home.getToolbar().addCommandToSideMenu(scheduleCommand);
         }
         else{
-        	scheduleCommand = new NavigationCommand("Displayed Schedule");
+        	scheduleCommand = new NavigationCommand("Schedule");
+        	//scheduleCommand.setNextForm(schedule);
+        	afterScheduleCommand = new NavigationCommand("Displayed Schedule");
+        	afterScheduleCommand.setNextForm(schedule);
+        	//home.getToolbar().removeOverflowCommand(scheduleCommand);
+        	home.getToolbar().addCommandToSideMenu(afterScheduleCommand);
         }
-        scheduleCommand.setNextForm(schedule);
-        home.getToolbar().addCommandToSideMenu(scheduleCommand);
+        
+         
         
         //Add a Homework Manager tab to the toolBar
         NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
