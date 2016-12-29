@@ -2,6 +2,7 @@ package com.polturonducken.bancroft;
 
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
+import com.codename1.ui.TextArea;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.ui.Command;
@@ -160,7 +161,7 @@ public class Bancroft {
         //Title label
         Label schedIntro = new Label("To set up your schedule, please");//backslash n doesn't appear to work
         Label schedIntro2 = new Label("input your classes below.");
-	    
+
         //adding page content 
         TextField class1 = new TextField();
         class1.setHint("First Period Class");
