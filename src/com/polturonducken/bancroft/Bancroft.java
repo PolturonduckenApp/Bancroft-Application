@@ -202,7 +202,7 @@ public class Bancroft {
 	    //adding components
 	    inputClasses.addComponent(schedIntro);
 	    inputClasses.addComponent(schedIntro2);
-	    for(int i = 0; i < classes.length; i++){
+	    for (int i = 0; i < classes.length; i++) {
 	    	inputClasses.addComponent(classes[i]);
 	    }
 	    inputClasses.addComponent(schedEnter);
@@ -225,7 +225,7 @@ public class Bancroft {
     public void setupScheduleForm() {
     	schedule = new Form("Schedule");
     	//Checks if the schedule has been inputted yet. If not, goes into this loop.
-        if(!schedInput) {
+        if (!schedInput) {
             Label intro = new Label("Please input classes below:");
             schedule.addComponent(intro);
             setBackCommand(schedule);
@@ -256,7 +256,7 @@ public class Bancroft {
             Button schedEnter = new Button("Enter");
             
     	    //adding components
-    	    for(int i = 0; i < classes.length; i++){
+    	    for (int i = 0; i < classes.length; i++) {
     	    	schedule.addComponent(classes[i]);
     	    }
     	    schedule.addComponent(schedEnter);
@@ -276,14 +276,14 @@ public class Bancroft {
             });
             		
         }
-        else{
+        else {
              //display the desired list of upcoming classes here
              Label schedIntro = new Label("Classes up Next:");
              schedule.addComponent(schedIntro);
              
              //displaying the inputted classes below -- later will make this list revolve to put most recent at top
              Label[] afterClasses = new Label[7];
-             for(int i = 0; i < afterClasses.length; i++){
+             for (int i = 0; i < afterClasses.length; i++) {
             	 afterClasses[i] = new Label(scheduleInputs[i]);
             	 schedule.addComponent(afterClasses[i]);
              }
@@ -320,7 +320,7 @@ public class Bancroft {
         //Add a input classses tab to the overflow menu for updating classes
         NavigationCommand classesCommand = new NavigationCommand("Input Classes");
        	classesCommand.setNextForm(inputClasses);
-       	if(add){
+       	if (add) {
        		home.getToolbar().addCommandToOverflowMenu(classesCommand); //addCommandToSideMenu(scheduleCommand);
        		add = false;
        	}
@@ -332,10 +332,10 @@ public class Bancroft {
        	NavigationCommand afterScheduleCommand = new NavigationCommand("Schedule");
        	afterScheduleCommand.setNextForm(schedule);
        	
-       	if(!schedInput){
+       	if (!schedInput) {
        		home.getToolbar().addCommandToSideMenu(scheduleCommand);
        	}
-       	else{
+       	else {
        		home.removeCommand(scheduleCommand);
        		home.getToolbar().addCommandToSideMenu(afterScheduleCommand);
        		home.revalidate();
