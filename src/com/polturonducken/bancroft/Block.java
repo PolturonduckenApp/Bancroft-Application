@@ -20,4 +20,17 @@ public class Block {
 	public Block() {
 		this("", null, null);
 	}
+	
+	public String getName() {return name;}
+	public void setName(String name) {this.name = name;}
+	
+	public Date startTime() {return startTime;}
+	public void setStartTime(Date startTime) {this.startTime = startTime;}
+	
+	public Date endTime() {return endTime;}
+	public void setEndTime(Date endTime) {this.endTime = endTime;}
+	
+	public long duration() {
+		return endTime.getTime() - startTime.getTime();
+	}
 }
