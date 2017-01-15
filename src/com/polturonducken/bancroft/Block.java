@@ -22,13 +22,13 @@ public class Block {
 	}
 	
 	public String getName() {return name;}
-	public void setName(String name) {this.name = name;}
+	public void setName(String name) {name = this.name;}
 	
 	public Date startTime() {return startTime;}
-	public void setStartTime(Date startTime) {this.startTime = startTime;}
+	public void setStartTime(Date startTime) {startTime = this.startTime;}
 	
 	public Date endTime() {return endTime;}
-	public void setEndTime(Date endTime) {this.endTime = endTime;}
+	public void setEndTime(Date endTime) {endTime = this.endTime;}
 	
 	public long duration() {
 		return endTime.getTime() - startTime.getTime();
