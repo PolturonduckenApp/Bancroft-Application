@@ -55,6 +55,8 @@ public class Bancroft {
     //the text the user inputs for their 7 classes
     private String[] scheduleInputs = new String[7];
     
+    private Class[] classList = new Class[7];
+    
     //Current time and date
     private long date;
 	
@@ -217,6 +219,15 @@ public class Bancroft {
 	    	scheduleInputs[4] = classes[4].getText();
 	    	scheduleInputs[5] = classes[5].getText();
 	    	scheduleInputs[6] = classes[6].getText();
+	    	
+	    	classList[0] = new Class(classes[0].getText(), 1);
+	    	classList[1] = new Class(classes[1].getText(), 2);
+	    	classList[2] = new Class(classes[2].getText(), 3);
+	    	classList[3] = new Class(classes[3].getText(), 4);
+	    	classList[4] = new Class(classes[4].getText(), 5);
+	    	classList[5] = new Class(classes[5].getText(), 6);
+	    	classList[6] = new Class(classes[6].getText(), 7);
+	    	
 	    	schedInput = true;
 			setupScheduleForm();
 			setupNavigationCommands();
@@ -305,8 +316,6 @@ public class Bancroft {
     boolean add = true;
     //boolean firstChange = true;
     public void setupNavigationCommands() {
-    	System.out.println("hey");
-    	
     	//Home navigation Form 
     	NavigationCommand homeCommand = new NavigationCommand("Home");
         homeCommand.setNextForm(home);
