@@ -15,6 +15,11 @@ public class Class extends Block {
 		this.calEvent = calEvent;
 	}
 	
+	public Class(String name, int period) {
+		super(name);
+		this.period = period;
+	}
+	
 	public int getPeriod() {return period;}
 	public void setPeriod(int period) {this.period = period;}
 	
