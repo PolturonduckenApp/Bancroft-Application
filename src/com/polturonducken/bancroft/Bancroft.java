@@ -57,6 +57,8 @@ public class Bancroft {
     
     private Class[] classList = new Class[7];
     
+    TextField[] classes;
+    
     //Current time and date
     private long date;
 	
@@ -177,7 +179,7 @@ public class Bancroft {
         Label schedIntro2 = new Label("input your classes below:");
 	    
         //adding page content 
-        TextField[] classes = new TextField[7];
+        classes = new TextField[7];
         classes[0] = new TextField();
         classes[0].setHint("First Period Class");
         
@@ -220,20 +222,33 @@ public class Bancroft {
 	    	scheduleInputs[5] = classes[5].getText();
 	    	scheduleInputs[6] = classes[6].getText();
 	    	
-	    	classList[0] = new Class(classes[0].getText(), 1);
-	    	classList[1] = new Class(classes[1].getText(), 2);
-	    	classList[2] = new Class(classes[2].getText(), 3);
-	    	classList[3] = new Class(classes[3].getText(), 4);
-	    	classList[4] = new Class(classes[4].getText(), 5);
-	    	classList[5] = new Class(classes[5].getText(), 6);
-	    	classList[6] = new Class(classes[6].getText(), 7);
+	    	createSchedule();
 	    	
 	    	schedInput = true;
 			setupScheduleForm();
 			setupNavigationCommands();
         });
     }
-    public void setupScheduleForm() {
+
+    private void createSchedule() {
+    	classList[0] = new Class(classes[0].getText(), 1);
+    	classList[1] = new Class(classes[1].getText(), 2);
+    	classList[2] = new Class(classes[2].getText(), 3);
+    	classList[3] = new Class(classes[3].getText(), 4);
+    	classList[4] = new Class(classes[4].getText(), 5);
+    	classList[5] = new Class(classes[5].getText(), 6);
+    	classList[6] = new Class(classes[6].getText(), 7);
+    	
+    	classList[0].setLetterDay(new String[]{"A", "B", "D", "F"});
+    	classList[1].setLetterDay(new String[]{"A", "C", "D", "F"});
+    	classList[2].setLetterDay(new String[]{"A", "C", "E", "F"});
+    	classList[3].setLetterDay(new String[]{"A", "C", "E", "G"});
+    	classList[4].setLetterDay(new String[]{"B", "C", "E", "G"});
+    	classList[5].setLetterDay(new String[]{"B", "D", "E", "G"});
+    	classList[6].setLetterDay(new String[]{"B", "D", "F", "G"});
+    }
+
+	public void setupScheduleForm() {
     	schedule = new Form("Schedule");
     	//Checks if the schedule has been inputted yet. If not, goes into this loop.
         if (!schedInput) {
