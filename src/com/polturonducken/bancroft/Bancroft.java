@@ -300,27 +300,65 @@ public class Bancroft {
         }
         else {
             //display the desired list of upcoming classes here
-            Label schedIntro = new Label("Classes up Next:");
+            Label schedIntro = new Label("Classes up next:");
             schedule.addComponent(schedIntro);
             
+            /*
             //displaying the inputted classes below -- later will make this list revolve to put most recent at top
             Label[] afterClasses = new Label[7];
             for (int i = 0; i < afterClasses.length; i++) {
                 afterClasses[i] = new Label(scheduleInputs[i]);
                 schedule.addComponent(afterClasses[i]);
             }
+           */
+           
+           //Adds the newly inputted classes to the schedule page
+            ArrayList<Map<String, Object>> data = new ArrayList<>();
+            for (int i = 0; i < scheduleInputs.length; i++) {
+            	data.add(createListEntry(scheduleInputs[i], ""+(i+1)));
+            }
             
+
+            DefaultListModel<Map<String, Object>> model = new DefaultListModel<>(data);
+            MultiList ml = new MultiList(model);
+            schedule.add(ml);
+            //schedule.paintComponent(screenshot.getGraphics(), true);
             setBackCommand(schedule);
+            
             schedule.show();
         }
     }
     
     public void setupHomeworkForm() {
-        homeworkManager = new Form("Homework Manager");
+         homeworkManager = new Form("Homework Manager");
         setBackCommand(homeworkManager);
+        /*
         Label homeIntro = new Label("Priority of Homework list:");
         homeworkManager.addComponent(homeIntro);
         sendNotification("ID", "Test", "A good message");
+        */
+        Image red = Image.createImage(100, 100, 0xffff0000);
+        Image green = Image.createImage(100, 100, 0xff00ff00);
+        Image blue = Image.createImage(100, 100, 0xff0000ff);
+        Image gray = Image.createImage(100, 100, 0xffcccccc);
+
+        ImageViewer iv = new ImageViewer(red);
+        iv.setImageList(new DefaultListModel<>(red, green, blue, gray));
+        homeworkManager.add(iv);
+        OnOffSwitch onOff = new OnOffSwitch();
+        homeworkManager.addComponent(onOff);
+        ArrayList<Map<String, Object>> data = new ArrayList<>();
+        data.add(createListEntry("A Game of Thrones", "1996"));
+        data.add(createListEntry("A Clash Of Kings", "1998"));
+        data.add(createListEntry("A Storm Of Swords", "2000"));
+        data.add(createListEntry("A Feast For Crows", "2005"));
+        data.add(createListEntry("A Dance With Dragons", "2011"));
+        data.add(createListEntry("The Winds of Winter", "2016 (please, please, please)"));
+        data.add(createListEntry("A Dream of Spring", "Ugh"));
+
+        DefaultListModel<Map<String, Object>> model = new DefaultListModel<>(data);
+        MultiList ml = new MultiList(model);
+        homeworkManager.add(ml);
     }
    
     public void setupNavigationCommands() {
@@ -380,5 +418,13 @@ public class Bancroft {
                                                         System.currentTimeMillis() + 10, // fire date/time
                                                         LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency
                                                         );
+    }
+    
+    
+    private Map<String, Object> createListEntry(String name, String date) {
+        Map<String, Object> entry = new HashMap<>();
+        entry.put("Line1", name);
+        entry.put("Line2", date);
+        return entry;
     }
 }
