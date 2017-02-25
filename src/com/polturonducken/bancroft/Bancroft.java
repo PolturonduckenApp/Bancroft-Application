@@ -30,26 +30,19 @@ public class Bancroft {
     private Form current;
     private Resources theme;
     
-    //home page that pops up when app is open
     private Form home;
     
-    //page that brings user to the Bancroft School website
     private Form website;
     
-    //pages that shows user's upcoming schedule
     private Form schedule;
     
-    //page in which user inputs their classes
     private Form inputClasses;
     
-    //page that displays the priority of homework list
     private Form homeworkManager;
     
-    //this and the method below reads the hight and width of the screen of the device being used
     private int screenWidth;
     private int screenHeight;
     
-    //Tells whether user has inputted their class schedule yet
     private boolean schedInput = false;
     
     //the text the user inputs for their 7 classes
@@ -59,13 +52,11 @@ public class Bancroft {
     
     TextField[] classes;
     
-    //Current time and date
     private long date;
     
     //Checker to see if classes were first inputted (only adds it if add = 1)
     int add = 0;
     
-    //reads in the screen dimentions
     public void init(Object context) {
         theme = UIManager.initFirstTheme("/theme");
         
