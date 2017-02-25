@@ -342,16 +342,17 @@ public class Bancroft {
             add++;
        	}
        	
-        //Add a Homework Manager tab to the toolBar
-        NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
-        homeworkCommand.setNextForm(homeworkManager);
-        home.getToolbar().addCommandToSideMenu(homeworkCommand);
-        
-       	//Add the Displaying Schedule page to main menu
+        //Add the Displaying Schedule page to main menu
        	NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
        	scheduleCommand.setNextForm(schedule);
        	NavigationCommand afterScheduleCommand = new NavigationCommand("Schedule");
        	afterScheduleCommand.setNextForm(schedule);
+        
+        //Add a Homework Manager tab to the toolBar
+        NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
+        homeworkCommand.setNextForm(homeworkManager);
+        home.getToolbar().addCommandToSideMenu(homeworkCommand);
+
        	
        	if (!schedInput) {
             home.getToolbar().addCommandToSideMenu(scheduleCommand);
