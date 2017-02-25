@@ -14,7 +14,17 @@ import com.codename1.ui.Button;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.list.DefaultListModel;
+import com.codename1.ui.list.MultiList;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.codename1.components.ImageViewer;
+import com.codename1.components.OnOffSwitch;
 import com.codename1.components.WebBrowser;
 import com.codename1.notifications.LocalNotification;
 
@@ -31,13 +41,13 @@ public class Bancroft {
     private Resources theme;
     
     private Form home;
-    
+  
     private Form website;
-    
+
     private Form schedule;
-    
+
     private Form inputClasses;
-    
+ 
     private Form homeworkManager;
     
     private int screenWidth;
@@ -57,6 +67,7 @@ public class Bancroft {
     //Checker to see if classes were first inputted (only adds it if add = 1)
     int add = 0;
     
+  
     public void init(Object context) {
         theme = UIManager.initFirstTheme("/theme");
         
@@ -330,7 +341,7 @@ public class Bancroft {
     }
     
     public void setupHomeworkForm() {
-         homeworkManager = new Form("Homework Manager");
+        homeworkManager = new Form("Homework Manager");
         setBackCommand(homeworkManager);
         /*
         Label homeIntro = new Label("Priority of Homework list:");
@@ -361,6 +372,7 @@ public class Bancroft {
         homeworkManager.add(ml);
     }
    
+    
     public void setupNavigationCommands() {
         //Home navigation Form
         NavigationCommand homeCommand = new NavigationCommand("Home");
@@ -380,17 +392,16 @@ public class Bancroft {
             add++;
        	}
        	
-        //Add the Displaying Schedule page to main menu
-       	NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
-       	scheduleCommand.setNextForm(schedule);
-       	NavigationCommand afterScheduleCommand = new NavigationCommand("Schedule");
-       	afterScheduleCommand.setNextForm(schedule);
-        
         //Add a Homework Manager tab to the toolBar
         NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
         homeworkCommand.setNextForm(homeworkManager);
         home.getToolbar().addCommandToSideMenu(homeworkCommand);
-
+        
+       	//Add the Displaying Schedule page to main menu
+       	NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
+       	scheduleCommand.setNextForm(schedule);
+       	NavigationCommand afterScheduleCommand = new NavigationCommand("Schedule");
+       	afterScheduleCommand.setNextForm(schedule);
        	
        	if (!schedInput) {
             home.getToolbar().addCommandToSideMenu(scheduleCommand);
@@ -417,14 +428,16 @@ public class Bancroft {
                                                         n,
                                                         System.currentTimeMillis() + 10, // fire date/time
                                                         LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency
-                                                        );
+                                                       );
     }
-    
-    
-    private Map<String, Object> createListEntry(String name, String date) {
-        Map<String, Object> entry = new HashMap<>();
-        entry.put("Line1", name);
-        entry.put("Line2", date);
-        return entry;
-    }
+//
+
+
+
+private Map<String, Object> createListEntry(String name, String date) {
+    Map<String, Object> entry = new HashMap<>();
+    entry.put("Line1", name);
+    entry.put("Line2", date);
+    return entry;
+}
 }
