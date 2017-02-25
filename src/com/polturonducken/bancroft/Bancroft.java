@@ -351,6 +351,10 @@ public class Bancroft {
             add++;
        	}
        	
+        //Add a Homework Manager tab to the toolBar
+        NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
+        homeworkCommand.setNextForm(homeworkManager);
+        home.getToolbar().addCommandToSideMenu(homeworkCommand);
         
        	//Add the Displaying Schedule page to main menu
        	NavigationCommand scheduleCommand = new NavigationCommand("Schedule");
@@ -367,10 +371,7 @@ public class Bancroft {
             home.revalidate();
        	}
        	
-        //Add a Homework Manager tab to the toolBar
-        NavigationCommand homeworkCommand = new NavigationCommand("Homework Manager");
-        homeworkCommand.setNextForm(homeworkManager);
-        home.getToolbar().addCommandToSideMenu(homeworkCommand);
+        
     }
     
     public void sendNotification(String identification, String title, String message) {
