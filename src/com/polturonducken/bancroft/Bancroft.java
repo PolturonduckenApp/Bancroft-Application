@@ -14,11 +14,12 @@ import com.codename1.ui.Button;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.list.DefaultListModel;
 import com.codename1.ui.list.MultiList;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,10 @@ import java.util.Map;
 import com.codename1.components.ImageViewer;
 import com.codename1.components.OnOffSwitch;
 import com.codename1.components.WebBrowser;
+import com.codename1.io.ConnectionRequest;
+import com.codename1.io.JSONParser;
+import com.codename1.io.Log;
+import com.codename1.io.NetworkManager;
 import com.codename1.notifications.LocalNotification;
 
 /**
@@ -33,7 +38,7 @@ import com.codename1.notifications.LocalNotification;
  * for the purpose of building native mobile applications using Java. It has been added to and modified
  * to match the app's desired funtions by Andrew Turley, Ryan Polhemus, and Philip Onffroy.
  */
-
+//lets see
 public class Bancroft {
     
     //current page the user is looking at
@@ -254,7 +259,8 @@ public class Bancroft {
     }
     
     public void setupScheduleForm() {
-        schedule = new Form("Schedule");
+        schedule = new Form("Schedule");////////////fix here
+        
         //Checks if the schedule has been inputted yet. If not, goes into this loop.
         if (!schedInput) {
             Label intro = new Label("Please input classes below:");
@@ -311,7 +317,7 @@ public class Bancroft {
         }
         else {
             //display the desired list of upcoming classes here
-            Label schedIntro = new Label("Classes up next:");
+            Label schedIntro = new Label("Classes up next:           ");
             schedule.addComponent(schedIntro);
             
             /*
@@ -326,13 +332,13 @@ public class Bancroft {
            //Adds the newly inputted classes to the schedule page
             ArrayList<Map<String, Object>> data = new ArrayList<>();
             for (int i = 0; i < scheduleInputs.length; i++) {
-            	data.add(createListEntry(scheduleInputs[i], ""+(i+1)));
+            	data.add(createListEntry(scheduleInputs[i], "Period "+ (i+1)));
             }
             
 
             DefaultListModel<Map<String, Object>> model = new DefaultListModel<>(data);
             MultiList ml = new MultiList(model);
-            schedule.add(ml);
+            schedule.addComponent(ml);
             //schedule.paintComponent(screenshot.getGraphics(), true);
             setBackCommand(schedule);
             
@@ -430,14 +436,38 @@ public class Bancroft {
                                                         LocalNotification.REPEAT_MINUTE  // Whether to repeat and what frequency
                                                        );
     }
-//
+//added methods
 
 
-
+//for multilist to work
 private Map<String, Object> createListEntry(String name, String date) {
     Map<String, Object> entry = new HashMap<>();
     entry.put("Line1", name);
     entry.put("Line2", date);
     return entry;
+}
+//for scrolling to work
+int pageNumber = 1;
+java.util.List<Map<String, Object>> fetchPropertyData(String text) {
+    try {
+        ConnectionRequest r = new ConnectionRequest();
+        r.setPost(false);
+        r.setUrl("http://api.nestoria.co.uk/api");
+        r.addArgument("pretty", "0");
+        r.addArgument("action", "search_listings");
+        r.addArgument("encoding", "json");
+        r.addArgument("listing_type", "buy");
+        r.addArgument("page", "" + pageNumber);
+        pageNumber++;
+        r.addArgument("country", "uk");
+        r.addArgument("place_name", text);
+        NetworkManager.getInstance().addToQueueAndWait(r);
+        Map<String,Object> result = new JSONParser().parseJSON(new InputStreamReader(new ByteArrayInputStream(r.getResponseData()), "UTF-8"));
+        Map<String, Object> response = (Map<String, Object>)result.get("response");
+        return (java.util.List<Map<String, Object>>)response.get("listings");
+    } catch(Exception err) {
+        Log.e(err);
+        return null;
+    }
 }
 }
