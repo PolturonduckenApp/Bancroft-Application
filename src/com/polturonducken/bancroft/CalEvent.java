@@ -18,6 +18,27 @@ public class CalEvent implements Externalizable {
 	private String eventDetails;
 	private String eventType;
 	
+	public CalEvent(String subj, String date, String sTime, String eTime, String eNotes, String eDetails, String eType)
+	{
+		subject = subj;
+		this.date = date;
+		startTime = sTime;
+		endTime = eTime;
+		eventNotes = eNotes;
+		eventDetails = eDetails;
+		eventType = eType;
+	}
+	public CalEvent(DataInputStream out)
+	{
+		//Yeah kinda lazy... but it works
+		try{
+			internalize(1, out);
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public int getVersion() //for backwards compat - states which version of storage is being used
 	{
