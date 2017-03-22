@@ -1,19 +1,25 @@
 package com.polturonducken.bancroft;
 
 import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.Command;
+import com.codename1.ui.Component;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Image;
+import com.codename1.ui.InfiniteContainer;
 import com.codename1.ui.Label;
 import com.codename1.ui.NavigationCommand;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.Button;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.list.DefaultListModel;
 import com.codename1.ui.list.MultiList;
@@ -25,6 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.codename1.components.ImageViewer;
+import com.codename1.components.InfiniteScrollAdapter;
+import com.codename1.components.MultiButton;
 import com.codename1.components.OnOffSwitch;
 import com.codename1.components.WebBrowser;
 import com.codename1.io.ConnectionRequest;
@@ -95,7 +103,7 @@ public class Bancroft {
         setupHomeForm();
         setupWebsiteForm();
         setupHomeworkForm();
-        setupScheduleForm();
+        setupScheduleForm(1);//s
         //setupInputClassesForm(); -- to be set up after classes first inputted
         
         //Add navigation commands to the home Form
@@ -235,7 +243,7 @@ public class Bancroft {
             createSchedule();
             
             schedInput = true;
-            setupScheduleForm();
+            setupScheduleForm(1);
             setupNavigationCommands();
         });
     }
@@ -258,7 +266,7 @@ public class Bancroft {
         classList[6].setLetterDay(new String[]{"B", "D", "F", "G"});
     }
     
-    public void setupScheduleForm() {
+    public void setupScheduleForm(int nextClass) {
         schedule = new Form("Schedule");////////////fix here
         
         //Checks if the schedule has been inputted yet. If not, goes into this loop.
@@ -308,7 +316,7 @@ public class Bancroft {
                 scheduleInputs[5] = classes[5].getText();
                 scheduleInputs[6] = classes[6].getText();
                 schedInput = true;
-                setupScheduleForm();
+                setupScheduleForm(1); // int is the next class
                 setupInputClassesForm();
                 add++;
                 setupNavigationCommands();
@@ -329,10 +337,12 @@ public class Bancroft {
             }
            */
            
-           //Adds the newly inputted classes to the schedule page
+           //Adds the newly inputted classes to the schedule page 
+           //Adds them in the correct order of what classes are up next, using nextClass int and modulus
+            
             ArrayList<Map<String, Object>> data = new ArrayList<>();
-            for (int i = 0; i < scheduleInputs.length; i++) {
-            	data.add(createListEntry(scheduleInputs[i], "Period "+ (i+1)));
+            for (int i = nextClass; i < nextClass+scheduleInputs.length; i++) {
+            	data.add(createListEntry(scheduleInputs[i  % 7], "Period "+ ((i)%7+1))); 
             }
             
 
