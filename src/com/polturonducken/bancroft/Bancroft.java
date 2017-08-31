@@ -49,8 +49,6 @@ import com.codename1.notifications.LocalNotification;
  */
 //lets see
 public class Bancroft {
-    
-    //current page the user is looking at
     private Form current;
     private Resources theme;
     
@@ -69,7 +67,6 @@ public class Bancroft {
     
     private boolean schedInput = false;
     
-    //the text the user inputs for their 7 classes
     private String[] scheduleInputs = new String[7];
     
     private Class[] classList = new Class[7];
@@ -88,29 +85,24 @@ public class Bancroft {
     public void init(Object context) {
         theme = UIManager.initFirstTheme("/theme");
         
-        // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
         
         screenWidth = Display.getInstance().getDisplayWidth();
         screenHeight = Display.getInstance().getDisplayHeight();
         date = System.currentTimeMillis();
     }
-    
-    //gets called to start up the app
     public void start() {
         if (current != null) {
             current.show();
             return;
         }
         
-        //Setup different pages
         setupHomeForm();
         setupWebsiteForm();
         setupHomeworkForm();
-        setupScheduleForm(1);//s
+        setupScheduleForm(1);
         //setupInputClassesForm(); -- to be set up after classes first inputted
         
-        //Add navigation commands to the home Form
         setupNavigationCommands();
         
         //Add Edit, Add and Delete Commands to the home Form context Menu
@@ -164,7 +156,6 @@ public class Bancroft {
         home = new Form("Home");
         home.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
         
-        //Title label
         Label welcome = new Label("Welcome to the Bancroft App!");
         
         //Username and password textfields
@@ -177,7 +168,6 @@ public class Bancroft {
         //Login button
         Button enter = new Button("Enter");
         
-        //Add components to form
         home.addComponent(welcome);
         home.addComponent(username);
         home.addComponent(password);
@@ -196,7 +186,6 @@ public class Bancroft {
     public void setupInputClassesForm() {
         inputClasses = new Form("Update Classes");
         
-        //Title label
         Label schedIntro = new Label("To update your schedule, please");//backslash n doesn't appear to work
         Label schedIntro2 = new Label("input your classes below:");
         
